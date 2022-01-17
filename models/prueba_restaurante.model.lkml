@@ -10,10 +10,9 @@ datagroup: prueba_restaurante_default_datagroup {
 
 persist_with: prueba_restaurante_default_datagroup
 
-explore: junio2020 {}
+# explore: junio2020 {}
 
+# explore: jun1 {}
+
+# explore: uniondatos {} estas bases de datos no se permiten visualizar
 explore: ventasjunio {}
-
-explore: jun1 {}
-
-explore: uniondatos {}
