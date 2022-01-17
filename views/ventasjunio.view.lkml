@@ -121,7 +121,7 @@ view: ventasjunio {
     sql: ${TABLE}.MESA ;;
   }
 
-  dimension: minut1 {
+  dimension: minuto {
     type: string
     sql: ${TABLE}.MINUT1 ;;
   }
