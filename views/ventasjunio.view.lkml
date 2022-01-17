@@ -12,8 +12,8 @@ view: ventasjunio {
     sql: ${TABLE}.BRUTO ;;
   }
 
-  dimension: cantidad {
-    type: number
+  measure: cantidad {
+    type: sum
     sql: ${TABLE}.CANTIDAD ;;
   }
 
@@ -119,6 +119,11 @@ view: ventasjunio {
   dimension: mesa {
     type: string
     sql: ${TABLE}.MESA ;;
+  }
+
+  dimension: mesanon {
+    type: yesno
+    sql: ${mesa}='0' ;;
   }
 
   dimension: minut1 {
