@@ -12,8 +12,8 @@ view: ventasjunio {
     sql: ${TABLE}.BRUTO ;;
   }
 
-  measure: cantidad {
-    type: sum
+  dimension: cantidad {
+    type: number
     sql: ${TABLE}.CANTIDAD ;;
   }
 
@@ -171,6 +171,9 @@ view: ventasjunio {
     sql: ${TABLE}.PROPINA ;;
   }
 
+  set: pagos {
+    fields: [idmesera,costo_neto,propina]
+  }
   dimension: psegundos {
     type: number
     sql: ${TABLE}.PSEGUNDOS ;;
@@ -216,8 +219,38 @@ view: ventasjunio {
     sql: ${TABLE}.ZONA ;;
   }
 
+
   measure: count {
     type: count
-    drill_fields: [longname]
+    drill_fields: [longname,pagos*]
   }
+
+  measure: total_cantidad {
+    type: sum
+    sql: ${cantidad} ;;
+    drill_fields: [pagos*]
+  }
+
+  measure: costo_neto {
+    type: sum
+    value_format_name: usd_0
+    sql: ${neto} ;;
+  }
+
+  measure: promedio_venta {
+    type: average
+    value_format_name: usd_0
+    sql: ${neto} ;;
+    filters: [ventasjunio.plataforma: "RAPPI"]
+  }
+
+  dimension: llave_primaria {
+    primary_key: yes
+    sql: concat(${factura},${menuid},${subid}) ;;
+  }
+
+  dimension: campo_check_por_zona {
+    sql: ${sqldt.campo_zona::string} ;;
+  }
+
 }

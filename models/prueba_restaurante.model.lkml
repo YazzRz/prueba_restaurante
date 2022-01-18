@@ -10,9 +10,22 @@ datagroup: prueba_restaurante_default_datagroup {
 
 persist_with: prueba_restaurante_default_datagroup
 
-# explore: junio2020 {}
+explore: junio2020 {}
 
 # explore: jun1 {}
 
 # explore: uniondatos {} estas bases de datos no se permiten visualizar
-explore: ventasjunio {}
+explore: ventasjunio {
+  always_filter: {
+    filters: [ventasjunio.tipo_venta: "Domicilios"]
+  }
+  sql_always_where: ${zona} ="Sur" or ${zona}="Norte";;
+  join: sqldt {
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${sqldt.zona}=${ventasjunio.zona} ;;
+  }
+}
+explore: sqldt {
+
+}
