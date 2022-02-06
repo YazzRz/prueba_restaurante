@@ -20,6 +20,10 @@ explore: ventasjunio {
     filters: [ventasjunio.tipo_venta: "Domicilios"]
   }
   sql_always_where: ${zona} ="Sur" or ${zona}="Norte";;
+  conditionally_filter: {
+    filters: [ventasjunio.producto: "AFFOGATO"]
+    unless: [zona,dia,momento_del_dia]
+  }
   join: sqldt {
     type: left_outer
     relationship: many_to_one

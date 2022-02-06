@@ -195,7 +195,7 @@ view: ventasjunio {
   }
 
   dimension: subid {
-    type: string
+    type: number
     sql: ${TABLE}.SUBID ;;
   }
 
@@ -250,7 +250,12 @@ view: ventasjunio {
   }
 
   dimension: campo_check_por_zona {
-    sql: ${sqldt.campo_zona::string} ;;
+    sql: ${subid}::string ;;
+  }
+
+  dimension: zona_ciudad {
+    type: string
+    sql: concat("@{ciudad}",${zona}) ;;
   }
 
 }
