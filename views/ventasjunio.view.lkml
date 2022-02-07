@@ -184,11 +184,6 @@ view: ventasjunio {
     sql: ${TABLE}.SEGUNDOS ;;
   }
 
-  # dimension: semana {
-  #   hidden: yes
-  #   type: string
-  #   sql: ${TABLE}.SEMANA ;;
-  # }
 
   dimension: sub_menu {
     type: string
