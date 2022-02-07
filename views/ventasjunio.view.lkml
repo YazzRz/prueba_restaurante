@@ -185,6 +185,7 @@ view: ventasjunio {
   }
 
   dimension: semana {
+    hidden: yes
     type: string
     sql: ${TABLE}.SEMANA ;;
   }
