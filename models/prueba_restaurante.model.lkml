@@ -21,7 +21,7 @@ explore: ventasjunio {
   }
   sql_always_where: ${zona} ="Sur" or ${zona}="Norte";;
   conditionally_filter: {
-    filters: [ventasjunio.producto: "AFFOGATO"]
+    filters: [ventasjunio.producto: "AGUA MANANTIAL"]
     unless: [zona,dia,momento_del_dia]
   }
   join: sqldt {
