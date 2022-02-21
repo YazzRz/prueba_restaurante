@@ -16,9 +16,9 @@ explore: junio2020 {}
 
 # explore: uniondatos {} estas bases de datos no se permiten visualizar
 explore: ventasjunio {
-  always_filter: {
-    filters: [ventasjunio.tipo_venta: "Domicilios"]
-  }
+  # always_filter: {
+  #   filters: [ventasjunio.tipo_venta: "Domicilios"]
+  # }
   sql_always_where: ${zona} ="Sur" or ${zona}="Norte";;
   conditionally_filter: {
     filters: [ventasjunio.producto: "AGUA MANANTIAL"]
@@ -28,6 +28,10 @@ explore: ventasjunio {
     type: left_outer
     relationship: many_to_one
     sql_on: ${sqldt.zona}=${ventasjunio.zona} ;;
+  }
+  access_filter: {
+    field: tipo_venta
+    user_attribute: envio_2
   }
 }
 explore: sqldt {
