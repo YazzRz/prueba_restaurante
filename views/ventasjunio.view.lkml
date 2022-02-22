@@ -254,4 +254,9 @@ view: ventasjunio {
     sql: concat("@{ciudad}",${zona}) ;;
   }
 
+  measure: suma_conteo {
+    type: sum_distinct
+    sql: ${zona} ;;
+  }
+
 }
