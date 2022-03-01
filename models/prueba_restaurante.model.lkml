@@ -34,6 +34,4 @@ explore: ventasjunio {
     user_attribute: envio_2
   }
 }
-explore: sqldt {
-
-}
+explore: sqldt {}
