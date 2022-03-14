@@ -267,4 +267,14 @@ view: ventasjunio {
     fields: [mesa,nomesera,producto,propina]
   }
 
+  measure: total_revenue {
+    type: sum
+    sql: ${TABLE}.PROPINA ;;
+  }
+
+  measure: user_count {
+    type: count_distinct
+    sql: ${nomesera} ;;
+  }
+
 }
