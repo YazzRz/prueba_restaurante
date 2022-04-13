@@ -82,7 +82,7 @@ view: ventasjunio {
   }
 
   dimension: idmesera {
-    type: string
+    type: number
     sql: ${TABLE}.IDMESERA ;;
   }
 
@@ -274,7 +274,13 @@ view: ventasjunio {
 
   measure: user_count {
     type: count_distinct
-    sql: ${nomesera} ;;
+    sql: ${idmesera} ;;
   }
+
+  measure: average_revenue_per_mesera {
+    type: number
+    sql: ${total_revenue}/${user_count} ;;
+  }
+
 
 }
