@@ -38,6 +38,7 @@ view: junio2020 {
   }
 
   dimension: factura {
+    primary_key: yes
     type: string
     sql: ${TABLE}.FACTURA ;;
   }
@@ -173,6 +174,7 @@ view: junio2020 {
   }
 
   measure: count {
+    group_label: "Calculos"
     type: count
     drill_fields: [longname]
   }

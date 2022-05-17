@@ -77,6 +77,8 @@ view: ventasjunio {
   }
 
   dimension: hora1 {
+    label: "Tipo Hora"
+    description: "Este campo me sirve para ....... calculo de hora"
     type: string
     sql: ${TABLE}.HORA1 ;;
   }
@@ -234,6 +236,7 @@ view: ventasjunio {
   }
 
   measure: promedio_venta {
+    group_label: "Calculos"
     type: average
     value_format_name: usd_0
     sql: ${neto} ;;
@@ -268,18 +271,36 @@ view: ventasjunio {
   }
 
   measure: total_revenue {
+    group_label: "Calculos"
     type: sum
     sql: ${TABLE}.PROPINA ;;
+    drill_fields: [calculos*]
+    link: {
+      label: "Explore as Table"
+      url: "
+      {% assign vis_config = '{
+      \"type\": \"marketplace_viz_multiple_value::multiple_value-marketplace\",
+      \"dividers\": \"true\",
+      \"style_ventasjunio.costo_neto\": \"#3A4245\",
+      \"style_ventasjunio.total_cantidad\": \"#FCA33D\"}'%}
+      {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
+    }
   }
 
   measure: user_count {
+    group_label: "Calculos"
     type: count_distinct
     sql: ${idmesera} ;;
   }
 
   measure: average_revenue_per_mesera {
+    group_label: "Calculos"
     type: number
     sql: ${total_revenue}/${user_count} ;;
+  }
+
+  set: calculos {
+    fields: [total_cantidad,costo_neto]
   }
 
 
