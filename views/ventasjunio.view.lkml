@@ -23,6 +23,7 @@ view: ventasjunio {
   }
 
   dimension: clientes {
+    group_label: "Información del cliente"
     type: number
     sql: ${TABLE}.CLIENTES ;;
   }
@@ -43,6 +44,7 @@ view: ventasjunio {
   }
 
   dimension: factura {
+    group_label: "Información del cliente"
     type: string
     sql: ${TABLE}.FACTURA ;;
   }
@@ -84,8 +86,17 @@ view: ventasjunio {
   }
 
   dimension: idmesera {
+    hidden: yes
     type: number
     sql: ${TABLE}.IDMESERA ;;
+  }
+
+  measure: count_id_mesera {
+    label: "Conteo Total de Meseras"
+    description: "Esta métrica me permite visualizar la cantidad total de meseras en el restaurante"
+    type: count_distinct
+    sql: ${idmesera} ;;
+    value_format: "0.00\%"
   }
 
   dimension: impuesto {
@@ -104,6 +115,7 @@ view: ventasjunio {
   }
 
   dimension: longname {
+    group_label: "Información Mesera"
     type: string
     sql: ${TABLE}.LONGNAME ;;
   }
@@ -119,6 +131,7 @@ view: ventasjunio {
   }
 
   dimension: mesa {
+    group_label: "Información del cliente"
     type: string
     sql: ${TABLE}.MESA ;;
   }
@@ -134,6 +147,7 @@ view: ventasjunio {
   }
 
   dimension: momento_del_dia {
+    group_label: "Información del cliente"
     type: string
     sql: ${TABLE}.MOMENTO_DEL_DIA ;;
   }
@@ -144,6 +158,7 @@ view: ventasjunio {
   }
 
   dimension: nomesera {
+    group_label: "Información Mesera"
     type: string
     sql: ${TABLE}.NOMESERA ;;
   }
@@ -169,6 +184,7 @@ view: ventasjunio {
   }
 
   dimension: propina {
+    group_label: "Información Mesera"
     type: number
     sql: ${TABLE}.PROPINA ;;
   }
@@ -217,6 +233,11 @@ view: ventasjunio {
     sql: ${TABLE}.ZONA ;;
   }
 
+  dimension: tipo_yesno {
+    type: yesno
+    sql: ${hora1}="14" ;;
+  }
+
 
   measure: count {
     type: count
@@ -235,12 +256,10 @@ view: ventasjunio {
     sql: ${neto} ;;
   }
 
-  measure: promedio_venta {
-    group_label: "Calculos"
-    type: average
-    value_format_name: usd_0
-    sql: ${neto} ;;
-    filters: [ventasjunio.plataforma: "RAPPI"]
+  measure: porcentaje_netas_mesera{
+    type: number
+    sql: ${total_revenue}/${count_id_mesera} ;;
+    value_format: "0.00\%"
   }
 
   dimension: llave_primaria {
@@ -252,10 +271,7 @@ view: ventasjunio {
     sql: ${subid}::string ;;
   }
 
-  dimension: zona_ciudad {
-    type: string
-    sql: concat("@{ciudad}",${zona}) ;;
-  }
+
 
   # measure: suma_conteo {
   #   hidden: no
@@ -276,13 +292,11 @@ view: ventasjunio {
     sql: ${TABLE}.PROPINA ;;
     drill_fields: [calculos*]
     link: {
-      label: "Explore as Table"
+      label: "Drill con infogramas"
       url: "
       {% assign vis_config = '{
-      \"type\": \"marketplace_viz_multiple_value::multiple_value-marketplace\",
-      \"dividers\": \"true\",
-      \"style_ventasjunio.costo_neto\": \"#3A4245\",
-      \"style_ventasjunio.total_cantidad\": \"#FCA33D\"}'%}
+      \"type\": \"looker_pie\",
+      \"value_labels\": \"legend\"}'%}
       {{ link }}&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis&limit=5000"
     }
   }
@@ -300,7 +314,7 @@ view: ventasjunio {
   }
 
   set: calculos {
-    fields: [total_cantidad,costo_neto]
+    fields: [plataforma,costo_neto]
   }
 
 

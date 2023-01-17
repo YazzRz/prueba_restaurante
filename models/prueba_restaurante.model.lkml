@@ -16,7 +16,7 @@ explore: junio2020 {}
 
 # explore: uniondatos {} estas bases de datos no se permiten visualizar
 explore: ventasjunio {
-  fields: [ALL_FIELDS*,-ventasjunio.promedio_venta,-ventasjunio.average_revenue_per_mesera]
+  fields: [ALL_FIELDS*,-ventasjunio.average_revenue_per_mesera]
   always_filter: {
     filters: [ventasjunio.tipo_venta: "Domicilios"]
   }
@@ -39,12 +39,14 @@ explore: ventasjunio {
     relationship: one_to_many
     sql_on: ${junio2020.factura}=${ventasjunio.factura} ;;
   }
-  join: calculo {
-    from: ventasjunio
-    type: left_outer
-    relationship: one_to_one
-    sql_on: ${ventasjunio.factura}=${calculo.factura} ;;
-    fields: [calculo.promedio_venta,calculo.average_revenue_per_mesera]
-  }
 }
 explore: sqldt {}
+
+explore: ventas_junio {
+  from: ventasjunio
+  join: jun1 {
+    type: left_outer
+    sql_on: ${ventas_junio.factura}=${jun1.factura} ;;
+    relationship: many_to_many
+  }
+}

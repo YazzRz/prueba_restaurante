@@ -186,4 +186,8 @@ view: jun1 {
     type: count
     drill_fields: [longname]
   }
+
+  measure: sum {
+    type: sum
+  }
 }
