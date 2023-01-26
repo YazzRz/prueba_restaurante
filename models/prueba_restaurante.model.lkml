@@ -42,11 +42,11 @@ explore: ventasjunio {
 }
 explore: sqldt {}
 
-explore: ventas_junio {
+explore: ventas_restaurante {
   from: ventasjunio
   join: jun1 {
     type: left_outer
-    sql_on: ${ventas_junio.factura}=${jun1.factura} ;;
+    sql_on: ${ventas_restaurante.factura}=${jun1.factura} ;;
     relationship: many_to_many
   }
 }
