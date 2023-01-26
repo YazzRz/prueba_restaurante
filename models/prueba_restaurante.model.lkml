@@ -35,6 +35,7 @@ explore: ventasjunio {
     user_attribute: envio_2
   }
   join: junio2020 {
+    view_label: "junio2020_peroConViewLabel"
     type: left_outer
     relationship: one_to_many
     sql_on: ${junio2020.factura}=${ventasjunio.factura} ;;
