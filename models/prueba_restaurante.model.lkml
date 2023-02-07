@@ -34,6 +34,10 @@ explore: ventasjunio {
     field: tipo_venta
     user_attribute: envio_2
   }
+  access_filter: {
+    field: producto
+    user_attribute: manantial
+  }
   join: junio2020 {
     view_label: "junio2020_peroConViewLabel"
     type: left_outer
@@ -41,9 +45,11 @@ explore: ventasjunio {
     sql_on: ${junio2020.factura}=${ventasjunio.factura} ;;
   }
 }
-explore: sqldt {}
+explore: sqldt {
+  group_label: "facturación"}
 
 explore: ventas_restaurante {
+  group_label: "facturación"
   from: ventasjunio
   join: jun1 {
     type: left_outer
