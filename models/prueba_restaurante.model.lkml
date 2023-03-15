@@ -41,20 +41,14 @@ explore: ventasjunio {
     field: tipo_venta
     user_attribute: envio_2
   }
+  access_filter: {
+    field: producto
+    user_attribute: manantial
+  }
   join: junio2020 {
+    view_label: "junio2020_peroConViewLabel"
     type: left_outer
     relationship: one_to_many
     sql_on: ${junio2020.factura}=${ventasjunio.factura} ;;
-  }
-}
-
-explore: ventas_restaurante {
-  from: ventasjunio
-  group_label: "Ventas Junio Detalle"
-  join: sqldt {
-    view_label: "Consultas junio"
-    type: left_outer
-    sql_on: ${ventas_restaurante.zona}=${sqldt.zona} ;;
-    relationship: many_to_one
   }
 }

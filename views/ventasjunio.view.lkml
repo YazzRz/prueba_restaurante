@@ -96,7 +96,7 @@ view: ventasjunio {
     description: "Esta métrica me permite visualizar la cantidad total de meseras en el restaurante"
     type: count_distinct
     sql: ${idmesera} ;;
-    value_format: "0.00\%"
+    value_format: "0"
   }
 
   dimension: impuesto {
