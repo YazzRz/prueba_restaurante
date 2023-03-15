@@ -3,6 +3,7 @@ view: jun1 {
     ;;
 
   dimension: _semana {
+    label: "valor semana {{ value }}"
     type: string
     sql: ${TABLE}._Semana ;;
   }

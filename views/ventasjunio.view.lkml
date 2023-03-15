@@ -102,7 +102,10 @@ view: ventasjunio {
   dimension: impuesto {
     type: number
     sql: ${TABLE}.IMPUESTO ;;
+    required_access_grants: [access_impuestos]
   }
+
+
 
   dimension: item {
     type: string
@@ -308,9 +311,15 @@ view: ventasjunio {
   }
 
   measure: average_revenue_per_mesera {
+    label: "Average"
     group_label: "Calculos"
     type: number
     sql: ${total_revenue}/${user_count} ;;
+    link: {
+      label: "Busqueda average"
+      url: "https://www.google.com/search?q={{value}}"
+      icon_url: "https://cdn-icons-png.flaticon.com/512/300/300221.png"
+    }
   }
 
   set: calculos {

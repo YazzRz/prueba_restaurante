@@ -10,13 +10,20 @@ datagroup: prueba_restaurante_default_datagroup {
 
 persist_with: prueba_restaurante_default_datagroup
 
-explore: junio2020 {}
+access_grant: access_impuestos {
+  user_attribute: id
+  allowed_values: ["16","23"]
+}
+
+explore: junio2020 {
+  group_label: "Ventas Junio Detalle"
+}
 
 # explore: jun1 {}
 
 # explore: uniondatos {} estas bases de datos no se permiten visualizar
 explore: ventasjunio {
-  fields: [ALL_FIELDS*,-ventasjunio.average_revenue_per_mesera]
+  fields: [ALL_FIELDS*]
   always_filter: {
     filters: [ventasjunio.tipo_venta: "Domicilios"]
   }
@@ -40,13 +47,14 @@ explore: ventasjunio {
     sql_on: ${junio2020.factura}=${ventasjunio.factura} ;;
   }
 }
-explore: sqldt {}
 
-explore: ventas_junio {
+explore: ventas_restaurante {
   from: ventasjunio
-  join: jun1 {
+  group_label: "Ventas Junio Detalle"
+  join: sqldt {
+    view_label: "Consultas junio"
     type: left_outer
-    sql_on: ${ventas_junio.factura}=${jun1.factura} ;;
-    relationship: many_to_many
+    sql_on: ${ventas_restaurante.zona}=${sqldt.zona} ;;
+    relationship: many_to_one
   }
 }
