@@ -37,14 +37,6 @@ explore: ventasjunio {
     relationship: many_to_one
     sql_on: ${sqldt.zona}=${ventasjunio.zona} ;;
   }
-  access_filter: {
-    field: tipo_venta
-    user_attribute: envio_2
-  }
-  access_filter: {
-    field: producto
-    user_attribute: manantial
-  }
   join: junio2020 {
     view_label: "junio2020_peroConViewLabel"
     type: left_outer
