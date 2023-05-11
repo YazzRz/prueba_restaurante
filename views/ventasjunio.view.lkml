@@ -18,6 +18,9 @@ view: ventasjunio {
   }
 
   dimension: check1 {
+    hidden: no
+    label: "Punto chequeo"
+    description: "Este es un campo de puntos de chequeo"
     type: string
     sql: ${TABLE}.CHECK1 ;;
   }
@@ -320,6 +323,11 @@ view: ventasjunio {
       url: "https://www.google.com/search?q={{value}}"
       icon_url: "https://cdn-icons-png.flaticon.com/512/300/300221.png"
     }
+  }
+
+  measure: conteo_check_1 {
+    type: count_distinct
+    sql: ${check1} ;;
   }
 
   set: calculos {

@@ -17,16 +17,21 @@ access_grant: access_impuestos {
 
 explore: junio2020 {
   group_label: "Ventas Junio Detalle"
+  label: "Ventas año actual"
 }
 
 # explore: jun1 {}
 
 # explore: uniondatos {} estas bases de datos no se permiten visualizar
 explore: ventasjunio {
+  access_filter: {
+    field: zona
+    user_attribute: zonas
+  }
   fields: [ALL_FIELDS*]
   always_filter: {
-    filters: [ventasjunio.tipo_venta: "Domicilios"]
-  }
+     filters: [ventasjunio.tipo_venta: "Domicilios"]
+   }
   sql_always_where: ${zona} ="Sur" or ${zona}="Norte";;
   conditionally_filter: {
     filters: [ventasjunio.producto: "AGUA MANANTIAL"]
